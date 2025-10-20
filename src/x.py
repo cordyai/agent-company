@@ -19,6 +19,25 @@ client = tweepy.Client(
     access_token_secret=X_ACCESS_TOKEN_SECRET,
 )
 
-# Post a tweet
-response = client.create_tweet(text="Hello from automated post! #Python")
-print("Tweet posted successfully!")
+# timeline = client.get_home_timeline()
+# for tweet in timeline.data:
+#     print(f"Tweet ID: {tweet.id} | Text: {tweet.text} | Author: {tweet.author_id}")
+
+client.create_tweet(text="Hello from automated post! #Python")
+
+# # Post a tweet
+# response = client.create_tweet(text="Hello from automated post! #Python")
+# print("Tweet posted successfully!")
+
+# auth = tweepy.OAuth1UserHandler(
+#     consumer_key=X_API_KEY,
+#     consumer_secret=X_API_KEY_SECRET,
+#     access_token=X_ACCESS_TOKEN,
+#     access_token_secret=X_ACCESS_TOKEN_SECRET,
+# )
+
+# api = tweepy.API(auth)
+
+# public_tweets = api.home_timeline()
+# for tweet in public_tweets:
+#     print(tweet.text)
