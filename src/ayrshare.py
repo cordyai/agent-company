@@ -27,7 +27,7 @@ def post(payload: dict):
     return r.json()
 
 
-def pinterest_post(title: str, image_url: str):
+def pinterest_post(title: str, media_url: str, link: str):
     """Post to Pinterest using AYRSHARE API.
 
     Options: https://www.ayrshare.com/docs/apis/post/social-networks/pinterest#pinterest-options"""
@@ -35,11 +35,11 @@ def pinterest_post(title: str, image_url: str):
         "post": title,
         "platforms": ["pinterest"],
         "mediaUrls": [
-            image_url,
+            media_url,
         ],
-        # "pinterestOptions": {
-        #     #
-        # },
+        "pinterestOptions": {
+            "link": link,
+        },
     }
     return post(payload)
 

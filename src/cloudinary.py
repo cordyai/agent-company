@@ -1,6 +1,6 @@
+import uuid
 import cloudinary
 import cloudinary.uploader
-from cloudinary.utils import cloudinary_url
 import dotenv
 import os
 
@@ -12,28 +12,21 @@ CLOUDINARY_API_SECRET = os.getenv("CLOUDINARY_API_SECRET")
 
 # Configuration
 cloudinary.config(
-    cloud_name="dy6xqduxc",
-    api_key="213115559217667",
-    api_secret=CLOUDINARY_API_SECRET,  # Click 'View API Keys' above to copy your API secret
+    cloud_name=CLOUDINARY_CLOUD_NAME,
+    api_key=CLOUDINARY_API_KEY,
+    api_secret=CLOUDINARY_API_SECRET,
     secure=True,
 )
 
-image_bytes = open("images/worldspeak.png", "rb").read()
 
-# Upload an image
-upload_result = cloudinary.uploader.upload(
-    image_bytes,
-    public_id="worldspeak",
-)
-print(upload_result["secure_url"])
-print(upload_result["url"])
+def upload_image(image_bytes: bytes) -> str:
+    """Upload an image to Cloudinary.
 
-# Optimize delivery by resizing and applying auto-format and auto-quality
-# optimize_url, _ = cloudinary_url("shoes", fetch_format="auto", quality="auto")
-# print(optimize_url)
-
-# # Transform the image: auto-crop to square aspect_ratio
-# auto_crop_url, _ = cloudinary_url(
-#     "shoes", width=500, height=500, crop="auto", gravity="auto"
-# )
-# print(auto_crop_url)
+    Returns the public URL of the uploaded image.
+    """
+    public_id = str(uuid.uuid4())
+    upload_result = cloudinary.uploader.upload(
+        image_bytes,
+        public_id=public_id,
+    )
+    return upload_result["url"]
